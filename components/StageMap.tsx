@@ -43,7 +43,7 @@ export default function StageMap({ courseId, courseTitle }: { courseId: string; 
   }, [courseId]);
 
   async function copyReview(unit: number) {
-    const text = `PassFinder "${courseTitle}" 과목 유닛 ${unit}의 검수 필요 문항을 get_review_batch로 받아 2차 검수해줘. 문항마다 정답·근거·난이도·선택지를 확인하고 submit_reviews로 통과/수정 제안/불합격과 사유를 보내줘.`;
+    const text = `passfinder "${courseTitle}" 과목 유닛 ${unit}의 검수 필요 문항을 get_review_batch로 받아 2차 검수해줘. 문항마다 정답·근거·난이도·선택지를 확인하고 submit_reviews로 통과/수정 제안/불합격과 사유를 보내줘.`;
     try {
       await navigator.clipboard.writeText(text);
       setNotice({ text: "내 AI에 붙여 넣을 문장을 복사했어요. 검수한 문항은 내 스테이지 출제 대상에 더해져요." });

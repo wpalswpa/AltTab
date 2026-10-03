@@ -24,6 +24,6 @@ for p in lecture["pages"]:
     page.insert_textbox(fitz.Rect(56, 100, 539, 780), p["text"], fontname="pr", fontsize=12, lineheight=1.6)
     page.insert_text((56, 815), lecture["title"], fontname="pr", fontsize=8, color=(0.45, 0.45, 0.45))
 doc.subset_fonts()  # 쓴 글자만 내장해 파일을 줄인다
-doc.set_metadata({"title": lecture["title"], "author": "PassFinder 팀"})
+doc.set_metadata({"title": lecture["title"], "author": "passfinder 팀"})
 doc.save(out, garbage=4, deflate=True)
 print(out, os.path.getsize(out), "bytes", len(lecture["pages"]), "pages")

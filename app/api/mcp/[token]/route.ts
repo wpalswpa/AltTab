@@ -18,7 +18,7 @@ function selfOrigin(req: Request) {
   return host ? `${proto}://${host}` : new URL(req.url).origin;
 }
 const INSTRUCTIONS =
-  "PassFinder는 교안으로 시험 대비 문항을 만들고 같은 수업 학생끼리 검수하는 서비스다. 문제 만들기 순서: list_courses → get_course_context(교안 읽기) → submit_concepts(개념 등록) → get_question_bank → submit_questions(1차 검수 후 제출). 다른 학생 문항 검수: get_review_batch → submit_reviews.";
+  "passfinder는 교안으로 시험 대비 문항을 만들고 같은 수업 학생끼리 검수하는 서비스다. 문제 만들기 순서: list_courses → get_course_context(교안 읽기) → submit_concepts(개념 등록) → get_question_bank → submit_questions(1차 검수 후 제출). 다른 학생 문항 검수: get_review_batch → submit_reviews.";
 
 type Rpc = { jsonrpc?: string; id?: string | number | null; method?: string; params?: Record<string, unknown> };
 
@@ -37,14 +37,14 @@ const result = (id: Rpc["id"], value: unknown) => ({ jsonrpc: "2.0", id, result:
 async function handleMessage(msg: Rpc, userId: string | null, req: Request) {
   if (typeof msg !== "object" || msg === null || Array.isArray(msg)) return error(null, -32600, "요청 형식이 올바르지 않아요");
   if (msg.id === undefined || msg.id === null) return null; // 알림에는 답하지 않는다
-  if (!userId) return error(msg.id, -32001, "연결 주소가 올바르지 않아요. PassFinder 과목 화면에서 MCP 주소를 다시 복사해 주세요");
+  if (!userId) return error(msg.id, -32001, "연결 주소가 올바르지 않아요. passfinder 과목 화면에서 MCP 주소를 다시 복사해 주세요");
   switch (msg.method) {
     case "initialize": {
       const asked = String(msg.params?.protocolVersion ?? "");
       return result(msg.id, {
         protocolVersion: VERSIONS.includes(asked) ? asked : "2025-06-18",
         capabilities: { tools: { listChanged: false } },
-        serverInfo: { name: "passfinder", title: "PassFinder", version: "0.1.0" },
+        serverInfo: { name: "passfinder", title: "passfinder", version: "0.1.0" },
         instructions: INSTRUCTIONS,
       });
     }

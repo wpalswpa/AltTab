@@ -8,7 +8,7 @@ export default function McpPanel({ courseTitle }: { courseTitle: string }) {
   const [url, setUrl] = useState("");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
-  const prompt = `PassFinder의 "${courseTitle}" 과목 교안을 읽고 핵심 개념을 쉬운 것부터 뽑아 등록한 뒤, 개념마다 난이도 1~3 문제를 만들어 1차 검수를 하고 올려줘.`;
+  const prompt = `passfinder의 "${courseTitle}" 과목 교안을 읽고 핵심 개념을 쉬운 것부터 뽑아 등록한 뒤, 개념마다 난이도 1~3 문제를 만들어 1차 검수를 하고 올려줘.`;
 
   useEffect(() => {
     api<{ exists: boolean }>("/api/mcp-token")

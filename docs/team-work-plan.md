@@ -1,4 +1,4 @@
-# PassFinder 5인 역할 분담안
+# passfinder 5인 역할 분담안
 
 > 이 문서의 아래 내용은 초기 분담 기록이다. 학생 AI·MCP 필수 및 서버 생성형 AI 제외 방침은 [현재 운영 설계](proposals/PRD-revision.md)로 대체한다. 최신 담당 경계·우선순위·검증 상태는 [인수인계](../인수인계.md)를 따른다. 과거 PR·Mint 필수 검토 절차도 최신 [협업 가이드](../CONTRIBUTING.md)로 대체됐다. 초기 제안과 현재 구현 완료 상태를 혼동하지 않는다.
 
@@ -11,7 +11,7 @@ A–E는 팀원이 역할을 고르기 위한 자리 표시자입니다. 실제 
 ### 현재 확인한 상태
 
 - 기준: `main@6e7ca3d`, 2026-10-03 12:52 KST 확인
-- [현재 PRD](https://github.com/Snow0821/AltTab/blob/6e7ca3db53450baf5c4fd74fd6b818cc3c4f344b/CramMate(%EB%B2%BC%EB%9D%BD%EC%B9%98%EA%B8%B0%20%EA%B5%AC%EC%A1%B0%EB%8C%80)%20PRD%20(1).md)의 제목은 PassFinder이며 FR-01~06이 필수, FR-07~11이 선택입니다
+- [현재 PRD](https://github.com/Snow0821/AltTab/blob/6e7ca3db53450baf5c4fd74fd6b818cc3c4f344b/CramMate(%EB%B2%BC%EB%9D%BD%EC%B9%98%EA%B8%B0%20%EA%B5%AC%EC%A1%B0%EB%8C%80)%20PRD%20(1).md)의 제목은 passfinder이며 FR-01~06이 필수, FR-07~11이 선택입니다
 - [현재 코드](https://github.com/Snow0821/AltTab/blob/6e7ca3db53450baf5c4fd74fd6b818cc3c4f344b/server.js)는 Express 기반 단일 `server.js`입니다. PDF 업로드·목록·새 탭 열기와 로컬 파일 저장이 있습니다
 - [package.json](https://github.com/Snow0821/AltTab/blob/6e7ca3db53450baf5c4fd74fd6b818cc3c4f344b/package.json)에는 `npm start`만 있으며 테스트·빌드 명령은 아직 없습니다
 - 코드상 업로드 상한은 20MB입니다. PRD의 50MB·중복 방지·텍스트 추출·임베딩·MCP·문항 검수·스테이지·이용권은 현재 구현 완료로 볼 수 없습니다
@@ -119,7 +119,7 @@ A가 `docs/api-contract.md` 초안을 한 곳에서 관리하고 B–E가 예시
 
 - **무료 체험과 MCP 권한:** FR-02는 이용권 없는 MCP 사용을 막지만 FR-06은 첫 5개 스테이지를 무료로 제공합니다. 무료 구간에서 MCP로 직접 출제할 수 있게 할지, 준비된 문항만 체험하게 할지 13:00에 정하고 C·D·E가 같은 규칙을 씁니다
 - **검수 주체:** PRD 본문의 학생 AI 2단계 검수와 일부 남은 “운영자 승인” 문구가 다릅니다. 이 계획은 FR-03의 학생 AI 검수 흐름을 따릅니다. 운영자 검수 화면은 추가하지 않습니다
-- **이름과 구현 기준:** 제목·README는 PassFinder, 일부 PRD 본문은 CramMate입니다. 데모 표기는 PassFinder로 맞추는 제안이며 파일명 전체 변경은 하지 않습니다. Express 유지 여부·20MB/50MB·저장 지속성도 A가 같은 자리에서 확인합니다
+- **이름과 구현 기준:** 서비스 표기와 문서 이름은 소문자 passfinder로 통일합니다. 이전 PRD 내용은 `passfinder-초안-PRD.md`로 보존하며 구현 기준은 루트 `PRD.md`입니다. 실제 주소·과거 커밋 링크는 유지합니다. Express 유지 여부·20MB/50MB·저장 지속성도 A가 같은 자리에서 확인합니다
 
 ## 5 16시 제출을 위한 시간표
 

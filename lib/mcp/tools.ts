@@ -82,7 +82,7 @@ function asStringArray(v: unknown): string[] | null {
 
 const listCourses: Tool = {
   name: "list_courses",
-  description: "내가 참여한 PassFinder 과목 목록을 돌려준다. 다른 도구에 넣을 course_id는 여기서 고른다.",
+  description: "내가 참여한 passfinder 과목 목록을 돌려준다. 다른 도구에 넣을 course_id는 여기서 고른다.",
   inputSchema: { type: "object", properties: {} },
   async run(userId) {
     const { data, error } = await db().from("course_members").select("course_id, courses(title)").eq("user_id", userId);
@@ -95,7 +95,7 @@ const listCourses: Tool = {
       ]);
       out.push({ course_id: r.course_id, title: (r.courses as unknown as { title: string }).title, ready_materials: materials ?? 0, concepts: concepts ?? 0 });
     }
-    if (!out.length) return { courses: [], message: "참여한 과목이 없어요. PassFinder 웹에서 과목을 만들거나 참여 코드로 들어가 주세요" };
+    if (!out.length) return { courses: [], message: "참여한 과목이 없어요. passfinder 웹에서 과목을 만들거나 참여 코드로 들어가 주세요" };
     return { courses: out };
   },
 };
