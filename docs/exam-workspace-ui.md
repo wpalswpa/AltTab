@@ -74,13 +74,14 @@ type Ranking = {
 
 API 계약 `POST /api/generate`
 - 요청: `{ title, range: {from, to}, pages: [{page, text}], count: 5 }`. 고른 범위의 글자만 보낸다. 최대 20쪽·40,000자.
-- 200: `{ ok: true, source: "school-ai", model, generatedAt, questions: [{ id, body, choices[4], answerIndex, explanation, evidence: {page, quote} }], rejectedCount }`
+- 200: `{ ok: true, source: "school-ai", model, generatedAt, questions: [{ id, body, choices[4], answerIndex, explanation, evidence: {page, quote}, concept, type }], rejectedCount, review: { method: "same-model-blind-solve", model, reviewed, calls, elapsedMs } }`. `concept`·`type`(정의·비교·적용)·`review`는 2026-10-03 품질 검사 보강으로 더한 필드이며 클라이언트는 무시해도 된다.
 - 422 `not_enough_valid`(검사 통과 5개 미만, 통과 수 포함), 503 `ai_not_configured`(서버에 `KOOKMIN_KEY` 없음), 502 `ai_failed`, 504 `ai_timeout`, 400 `invalid_input`. 실패 응답에는 문항을 넣지 않는다.
 
 서버 검사(통과한 문항만 응답에 넣는다)
 - 선택지 정확히 4개, 빈 칸·중복 없음, 정답 번호 0~3, 문제 8자 이상, 해설 있음
 - 근거 쪽이 고른 범위 안이고, 근거 문장(공백 무시 10자 이상)이 그 쪽 글자에 그대로 들어 있음
 - 같은 문제 문장 중복 제거. 첫 호출에서 7개를 받고, 5개가 안 되면 부족분만 한 번 더 요청한다. 그래도 모자라면 422.
+- 보강(2026-10-03, [AI 문항 품질 검사 설계](ai-question-quality.md)): 보기가 서로 포함·같은 근거·같은 보기·비슷한 문장·같은 개념 반복을 거절한다. 글자 검사를 지난 문항은 같은 모델에게 정답·해설을 숨기고 다시 풀게 하는 풀이 검토와 해설 검토를 거쳐, 정답 일치·단일 정답·근거 유효·해설 일치일 때만 응답에 넣는다. 전체 요청은 호출 최대 6회·110초(환경 변수 `GENERATE_MAX_CALLS`·`GENERATE_DEADLINE_MS`) 안에서만 돌고, 상한에 걸리면 422다. 같은 모델의 재호출이므로 독립 검증이나 정답 검증 완료가 아니다.
 
 저장과 중복 방지
 - 이 브라우저의 localStorage에 저장한다: 자료(`pf.make.materials`), 생성 묶음(`pf.make.sets`, 키 = 자료 해시 + 범위), 풀이 기록(`pf.make.attempts`). 새로고침 뒤에도 남고, 같은 자료·범위는 서버를 다시 부르지 않는다. 다른 기기와는 공유되지 않는다(DB 연결 전 한계).
