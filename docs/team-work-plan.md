@@ -1,6 +1,6 @@
 # passfinder 5인 역할 분담안
 
-> 이 문서의 아래 내용은 초기 분담 기록이다. 학생 AI·MCP 필수 및 서버 생성형 AI 제외 방침은 [현재 운영 설계](proposals/PRD-revision.md)로 대체한다. 최신 담당 경계·우선순위·검증 상태는 [인수인계](../인수인계.md)를 따른다. 과거 PR·Mint 필수 검토 절차도 최신 [협업 가이드](../CONTRIBUTING.md)로 대체됐다. 초기 제안과 현재 구현 완료 상태를 혼동하지 않는다.
+> 이 문서의 아래 내용은 초기 분담 기록이다. 학생 AI·MCP 필수 및 서버 생성형 AI 제외 방침은 [현재 운영 설계](proposals/service-operation-design.md)로 대체한다. 최신 담당 경계·우선순위·검증 상태는 [인수인계](../인수인계.md)를 따른다. 과거 PR·Mint 필수 검토 절차도 최신 [협업 가이드](../CONTRIBUTING.md)로 대체됐다. 초기 제안과 현재 구현 완료 상태를 혼동하지 않는다.
 
 2026년 10월 3일 16:00 KST 제출을 위한 작업 제안입니다. **A 서버·통합, B 교안 처리, C MCP·문항 검수, D 학습 화면, E 이용권·QA·데모**로 나누고, 14:40부터 기능 추가보다 연결과 검증에 집중합니다.
 
@@ -119,7 +119,7 @@ A가 `docs/api-contract.md` 초안을 한 곳에서 관리하고 B–E가 예시
 
 - **무료 체험과 MCP 권한:** FR-02는 이용권 없는 MCP 사용을 막지만 FR-06은 첫 5개 스테이지를 무료로 제공합니다. 무료 구간에서 MCP로 직접 출제할 수 있게 할지, 준비된 문항만 체험하게 할지 13:00에 정하고 C·D·E가 같은 규칙을 씁니다
 - **검수 주체:** PRD 본문의 학생 AI 2단계 검수와 일부 남은 “운영자 승인” 문구가 다릅니다. 이 계획은 FR-03의 학생 AI 검수 흐름을 따릅니다. 운영자 검수 화면은 추가하지 않습니다
-- **이름과 구현 기준:** 서비스 표기와 문서 이름은 소문자 passfinder로 통일합니다. 이전 PRD 내용은 `passfinder-초안-PRD.md`로 보존하며 구현 기준은 루트 `PRD.md`입니다. 실제 주소·과거 커밋 링크는 유지합니다. Express 유지 여부·20MB/50MB·저장 지속성도 A가 같은 자리에서 확인합니다
+- **이름과 구현 기준:** 서비스 표기는 소문자 passfinder입니다. 제출 PRD는 [main의 passfinder-prd.md](https://github.com/Snow0821/AltTab/blob/main/passfinder-prd.md) 하나이며 Next 추가 범위는 [확장 구현 명세](next-extension-spec.md)에 분리합니다. 이전 초안은 Git 이력으로 보존합니다. 실제 주소·과거 커밋 링크는 유지합니다. Express 유지 여부·20MB/50MB·저장 지속성도 A가 같은 자리에서 확인합니다
 
 ## 5 16시 제출을 위한 시간표
 
@@ -164,7 +164,7 @@ E가 결과를 모으되 각 담당자가 자기 기능을 직접 확인합니�
 
 ## 7 Next.js 기준을 고를 때의 파일 대응 (PR #4 제안)
 
-PR #4는 PRD 8절(Next.js·Supabase·Vercel) 기준 구현이다. 팀이 이 기준을 고르면 A~E 역할은 위와 같고 수정 파일만 아래처럼 바뀐다. `server.js` 한 파일 대신 기능별 파일로 나눠 같은 파일을 두 사람이 고치지 않는다. 기능 추가 중단은 이 문서의 14:40을 따른다.
+PR #4는 확장 구현 명세 8절(Next.js·Supabase·Vercel) 기준 구현이다. 팀이 이 기준을 고르면 A~E 역할은 위와 같고 수정 파일만 아래처럼 바뀐다. `server.js` 한 파일 대신 기능별 파일로 나눠 같은 파일을 두 사람이 고치지 않는다. 기능 추가 중단은 이 문서의 14:40을 따른다.
 
 담당자 이름은 제안이며 확정되지 않았다. GitHub 계정은 chcg305 박재현, Snow0821 최순호, wpalswpa 이제민, yena1717 박예나, 7117wkd 장용선이다(13:50 확인).
 
@@ -178,7 +178,7 @@ PR #4는 PRD 8절(Next.js·Supabase·Vercel) 기준 구현이다. 팀이 이 기
 | B 교안 처리 | 최순호 | `components/MaterialsPanel.tsx`, `app/api/courses/[id]/materials/`, `app/api/materials/[id]/index/`, `lib/embed.ts`, `lib/chunk.ts` | 설계서 8절 교안 API | FR-01 업로드·실패 4종·재업로드 안내, 30쪽·200쪽 PDF 분석 시간 측정 |
 | C MCP·문항 검수 | 박재현 | `app/api/mcp/[token]/`, `app/api/mcp-token/`, `lib/mcp/tools.ts`, `lib/review.ts`, `components/McpPanel.tsx` | 설계서 8절 MCP | Claude Desktop·Claude Code에서 도구 7개 호출, 계정 3개로 검증 완료 전환, 체험 과목 문항 만들기 |
 | D 학습 화면 | 박예나 | `components/StageMap.tsx`, `app/courses/[id]/page.tsx`, `app/courses/[id]/play/` | 설계서 8절 퀴즈 API | FR-04·05 문구가 모두 화면에 나옴, 휴대폰 너비에서 가로 스크롤 없음 |
-| E 이용권·QA·데모 | 장용선 | `app/courses/[id]/pay/`, `app/api/payments/`, `lib/entitlement.ts`, `app/api/stages/`, `lib/quiz.ts`, PRD 결과표 | 설계서 8절 결제·퀴즈 API | FR-05 채점·FR-06 결제 경계 확인, PRD "최종 구현 및 검증" 표 기록 |
+| E 이용권·QA·데모 | 장용선 | `app/courses/[id]/pay/`, `app/api/payments/`, `lib/entitlement.ts`, `app/api/stages/`, `lib/quiz.ts`, 확장 명세 결과표 | 설계서 8절 결제·퀴즈 API | FR-05 채점·FR-06 결제 경계 확인, 확장 명세 "확장 구현 및 검증" 표 기록 |
 
 PR #3(Express MCP)의 기능은 다음처럼 대응한다. `list_materials` → `list_courses`와 `get_course_context`, `get_material_text` → `get_course_context`(cursor로 전체 읽기), `submit_questions` → `submit_questions`(1차 검수 체크리스트와 근거 대조 추가), 서버의 pdf-parse 추출 → 브라우저 unpdf 추출, `/questions/:id` 화면 → 스테이지 플레이. 팀이 Express를 고르면 이 절은 지운다.
 

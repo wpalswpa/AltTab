@@ -1,4 +1,4 @@
-// 문항 상태와 출제 대상 규칙(소유: MCP·검수 모듈, PRD 4절 자동 상태 판정). 퀴즈 모듈은 읽기만 한다.
+// 문항 상태와 출제 대상 규칙(소유: MCP·검수 모듈, docs/next-extension-spec.md 4절 자동 상태 판정). 퀴즈 모듈은 읽기만 한다.
 import { db } from "./supabase-admin";
 
 export type QuestionStatus = "first_pass" | "verified" | "hidden";

@@ -1,4 +1,4 @@
-// PRD FR-04·05 규칙 확인. 실행: npm test (Node 22.6+ 의 TypeScript 실행 기능 사용)
+// docs/next-extension-spec.md FR-04·05 규칙 확인. 실행: npm test (Node 22.6+ 의 TypeScript 실행 기능 사용)
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {

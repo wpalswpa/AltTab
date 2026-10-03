@@ -19,7 +19,7 @@ export type Tool = {
   run: (userId: string, args: Args, req: Request) => Promise<unknown>;
 };
 
-const EVIDENCE_MIN = QUALITY.evidenceMin; // PRD FR-03 근거 불일치 기준(lib/config.ts)
+const EVIDENCE_MIN = QUALITY.evidenceMin; // docs/next-extension-spec.md FR-03 근거 불일치 기준(lib/config.ts)
 const IMPORTANCE_MIN = QUALITY.importanceMin; // 개념과 관련 있다고 보는 청크 유사도
 const CHECK_NAMES: Record<string, string> = {
   answer_correct: "정답",

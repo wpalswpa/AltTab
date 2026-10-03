@@ -90,7 +90,7 @@ async function schoolJson(system: string, user: string): Promise<{ json: unknown
 
 export type GenResult = { json: unknown; usage: Usage; model: string; provider: "school" | "gateway"; fallbackReason?: string };
 
-// PRD 8절: 학교 API를 먼저 부르고, 키가 없거나 실패하면 Gateway 모델을 부른다.
+// docs/next-extension-spec.md 8절: 학교 API를 먼저 부르고, 키가 없거나 실패하면 Gateway 모델을 부른다.
 export async function generateJson(system: string, user: string, req?: Request): Promise<GenResult> {
   let fallbackReason = "학교 API 키 없음";
   if (schoolKey()) {

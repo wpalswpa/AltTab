@@ -1,4 +1,4 @@
-// PRD 4절 레벨 디자인과 설계서 6절 계산 규칙. DB를 모르는 순수 함수만 둔다.
+// docs/next-extension-spec.md 4절 레벨 디자인과 설계서 6절 계산 규칙. DB를 모르는 순수 함수만 둔다.
 // 확인: npm test (tests/rules.test.ts)
 
 export const STAGE_SIZE = 5; // 스테이지 1회 문제 수

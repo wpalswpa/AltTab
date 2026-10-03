@@ -1,6 +1,6 @@
-// 설정의 단일 원천. 모델 이름·기준값·호출 상한·업로드 제한·가격을 여기서만 정한다(PRD 8절).
+// 설정의 단일 원천. 모델 이름·기준값·호출 상한·업로드 제한·가격을 여기서만 정한다(docs/next-extension-spec.md 8절).
 // 서버 전용 값은 환경 변수로 바꿀 수 있고, 화면에서도 쓰는 값(가격·업로드 제한)은 이 파일의 기본값을 함께 쓴다.
-// 스테이지 규칙(5문제, 4개 정답, 첫 유닛 무료 등)은 PRD 4절의 규칙이라 lib/rules.ts에 둔다.
+// 스테이지 규칙(5문제, 4개 정답, 첫 유닛 무료 등)은 docs/next-extension-spec.md 4절의 규칙이라 lib/rules.ts에 둔다.
 
 function num(value: string | undefined, fallback: number): number {
   const n = Number(value);

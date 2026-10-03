@@ -9,20 +9,22 @@
 | Express 제출 기준 | 원격 `main@3e2649b`. 팀원 보고로 학교 AI 5문항 생성 약 17초, 배포 검사 12/12 통과. 통합 담당은 해당 코드 경로를 확인했으며 같은 배포 실행을 여기서 재현한 것은 아님 |
 | Next.js 통합 대상 | `feat/nextjs-foundation@7c60c42`. 가입·과목·PDF·MCP·스테이지·모의 결제와 서버 첫 유닛 생성 코드 포함 |
 | 통합 검증 | 통합 담당 실행 기준 Next 단위 검사 17개, 기존 Express 검사 10개, Next 빌드 통과 |
-| 남은 검증 | 새 DB 생성·적용, Next 실제 DB·AI 연동 전체 흐름, 공개 배포. 빌드 성공은 서비스 전체 동작이나 사업성 증거가 아님 |
-| 운영 결정 | 15시 제출 안전판은 Express main으로 유지. Next 통합본은 검증 후 별도로 전환 여부를 판단 |
+| 새 DB 연결 | Supabase `passfinder`(Seoul, Healthy), 테이블 17개와 뷰·RPC 적용. 서비스 키 접근·RPC 권한·익명 과목 빈 목록과 DB 설정을 포함한 빌드 성공 확인 |
+| 남은 검증 | 실제 AI 생성 → DB 저장 → 풀이 전체 흐름, 별도 공개 배포. 연결·빌드 성공은 서비스 전체 동작이나 사업성 증거가 아님 |
+| 현재 역할 | Codex는 main 문서 정리, Claude Code는 공통 시험 구현. 제출 실행은 Express main으로 유지하며 Next 전환·main 런타임 통합은 진행하지 않음 |
 
-사용자가 새 DB를 만드는 중이다. DB가 준비됐다고 가정하거나 기존 배포 환경을 바꾸지 않는다. 현재 Next 서버 생성은 첫 5개 개념·25문항 범위이며 추가 문항·공유 검수에는 기존 MCP 경로가 남아 있다.
+새 DB 연결과 로컬 설정은 준비됐으며 기존 공개 배포 환경은 바꾸지 않았다. 현재 Next 서버 생성은 첫 5개 개념·25문항 범위이며 추가 문항·공유 검수에는 기존 MCP 경로가 남아 있다. 상세 확인 범위는 [인수인계](인수인계.md)를 따른다.
 
 ## 읽는 순서
 
-1. [인수인계](인수인계.md): 브랜치별 상태, 근거 출처, 이어갈 일
-2. [PRD](PRD.md): 이 Next 통합본의 구현 범위·기능별 완료 기준
-3. [설계서](docs/설계.md): 데이터·API·검수·운영 설계
-4. [운영 방향·축소안](docs/proposals/PRD-revision.md): 서버 AI 운영 목표와 축소 제안. 현재 코드의 제공량·가격을 대체하지 않음
-5. [협업 가이드](CONTRIBUTING.md), [AI 작업 지침](AGENTS.md)
+1. [제출 PRD](https://github.com/Snow0821/AltTab/blob/main/passfinder-prd.md): main에서 관리하는 제출 정본 1개
+2. [인수인계](인수인계.md): 브랜치별 상태, 근거 출처, 이어갈 일
+3. [확장 구현 명세](docs/next-extension-spec.md): 이 Next 통합본의 구현 범위·기능별 완료 기준. 제출 PRD가 아님
+4. [설계서](docs/설계.md): 데이터·API·검수·운영 설계
+5. [운영 설계 제안](docs/proposals/service-operation-design.md): 서버 AI 운영 목표와 축소 제안. 현재 코드의 제공량·가격을 대체하지 않음
+6. [협업 가이드](CONTRIBUTING.md), [AI 작업 지침](AGENTS.md)
 
-원격 main의 제출 PRD는 해당 브랜치의 `passfinder-초안-PRD.md`를 유지한다. 이 브랜치의 PRD와 제출 문서를 혼용하지 않는다. 과목 1회 2,900원·모든 과목 30일 9,900원이 현재 Next 상품이며 월 2,900원 제안과의 차이는 후속 정합화 사항이다.
+제출 PRD 사본은 이 브랜치에 두지 않는다. 이전 초안의 요구는 확장 구현 명세에 보존하며 원문은 Git 이력에서 확인한다. 과목 1회 2,900원·모든 과목 30일 9,900원이 현재 Next 상품이며 월 2,900원 제안과의 차이는 후속 정합화 사항이다.
 
 ## 실행 방법
 
@@ -35,7 +37,7 @@ npm run build
 npm run dev
 ```
 
-실제 학습 흐름에는 [.env.example](.env.example)의 Supabase 설정과 [스키마](supabase/schema.sql)가 필요하다. 새 DB를 확인한 뒤 SQL Editor 또는 `npm run db:apply`로 적용한다. `npm run db:check`는 읽기 전용이 아니며 테스트 계정·데이터·실패 주입용 함수를 만든다. 중간 실패 시 정리가 남을 수 있으므로 별도 검증 환경에서만 실행한다. API 키는 서버 환경변수에만 둔다. 실제 Next AI 생성·저장 전체 흐름은 아직 검증하지 않았다.
+실제 학습 흐름에는 [.env.example](.env.example)의 Supabase 설정과 [스키마](supabase/schema.sql)가 필요하다. 현재 새 DB에는 적용돼 있으며 다른 검증 환경을 준비할 때 SQL Editor 또는 `npm run db:apply`를 사용한다. `npm run db:check`는 읽기 전용이 아니며 테스트 계정·데이터·실패 주입용 함수를 만든다. 중간 실패 시 정리가 남을 수 있으므로 별도 검증 환경에서만 실행한다. API 키는 서버 환경변수에만 둔다. 실제 Next AI 생성·저장 전체 흐름은 아직 검증하지 않았다.
 
 ## 파일 구조
 

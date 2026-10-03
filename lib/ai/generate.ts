@@ -47,7 +47,7 @@ function isObj(v: unknown): v is Obj {
   return typeof v === "object" && v !== null && !Array.isArray(v);
 }
 
-// 모델 출력이 형식을 어기면 저장 전에 실패로 처리한다(PRD FR-12: 실패하면 아무것도 저장하지 않음).
+// 모델 출력이 형식을 어기면 저장 전에 실패로 처리한다(docs/next-extension-spec.md FR-12: 실패하면 아무것도 저장하지 않음).
 export function normalize(json: unknown): { concepts: Obj[]; questions: Obj[] } {
   if (!isObj(json) || !Array.isArray(json.concepts) || !Array.isArray(json.questions)) {
     throw new AiError("생성 결과 형식이 올바르지 않습니다");

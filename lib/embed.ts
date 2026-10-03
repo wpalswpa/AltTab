@@ -1,6 +1,6 @@
 // 임베딩(소유: 교안 모듈). 서버가 부르는 유일한 AI다. 생성형 LLM은 부르지 않는다.
 // 우선순위: OPENAI_API_KEY(직접) → Vercel AI Gateway(AI_GATEWAY_API_KEY 또는 Vercel 배포의 OIDC 토큰)
-// Gateway 무료 등급은 openai/text-embedding-3-small을 막는다(2026-10-03 403 실측). 무료 등급에서 호출되는 qwen3-embedding-4b를 1536차원으로 쓴다(PRD 부록 2-13).
+// Gateway 무료 등급은 openai/text-embedding-3-small을 막는다(2026-10-03 403 실측). 무료 등급에서 호출되는 qwen3-embedding-4b를 1536차원으로 쓴다(docs/next-extension-spec.md 부록 2-13).
 export const EMBED_MODEL = process.env.EMBED_MODEL || "alibaba/qwen3-embedding-4b";
 export const EMBED_DIM = 1536;
 const BATCH = 100;
