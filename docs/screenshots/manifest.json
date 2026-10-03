@@ -1,0 +1,107 @@
+{
+  "capture_method": "Playwright Chromium full-page screenshot; original PNG, no image edits",
+  "repository_reference_commit": "9c3916b",
+  "deployment_commit": "not verified",
+  "images": [
+    {
+      "file": "home.png",
+      "source_url": "https://alt-tab-mu.vercel.app/",
+      "captured_at_kst": "2026-10-03T21:39:08+09:00",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 43584,
+      "sha256": "b3ddb82101e8991b114a3a8d486e1eedbd46ff40983cd6237f0de804f1dd2f08",
+      "evidence_type": "UI demo"
+    },
+    {
+      "file": "pdf-select.png",
+      "source_url": "https://alt-tab-mu.vercel.app/study/make.html",
+      "captured_at_kst": "2026-10-03T21:39:09+09:00",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 79809,
+      "sha256": "47705d507dad6ef73afb13b6e9bad642a95272a55e9be47100020f614a07067f",
+      "evidence_type": "Input screen"
+    },
+    {
+      "file": "v2-list.png",
+      "source_url": "https://alt-tab-mu.vercel.app/v2/",
+      "captured_at_kst": "2026-10-03T21:40:40+09:00",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 52208,
+      "sha256": "2e3cbded61e100b014af333b822af2f51346a9a238c0d08ac087143ae9c99b3f",
+      "evidence_type": "Live list"
+    },
+    {
+      "file": "sample-quiz.png",
+      "source_url": "https://alt-tab-mu.vercel.app/study/make.html",
+      "captured_at_kst": "2026-10-03T21:40:41+09:00",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 90950,
+      "sha256": "dbec1d8d543cb1e1e008ae7f353283c2100efc4dbacbef88556ade95014e46f0",
+      "evidence_type": "Built-in sample"
+    },
+    {
+      "file": "workspace.png",
+      "source_url": "https://alt-tab-mu.vercel.app/",
+      "captured_at_kst": "2026-10-03T21:41:41+09:00",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 67925,
+      "sha256": "178d013221eeff129eb354362cb6ca4a1b666e37df66232c7cdbfc621820ab10",
+      "evidence_type": "UI demo with sample data"
+    },
+    {
+      "file": "sample-result.png",
+      "source_url": "https://alt-tab-mu.vercel.app/study/make.html",
+      "captured_at_kst": "2026-10-03T21:41:44+09:00",
+      "width": 1440,
+      "height": 2498,
+      "bytes": 206958,
+      "sha256": "7131682b0514c5368ee24ccc09218af04cc3cebfcc1123e85842f5784058def7",
+      "evidence_type": "Built-in sample: 4/5 correct"
+    },
+    {
+      "file": "sample-review.png",
+      "source_url": "https://alt-tab-mu.vercel.app/study/make.html",
+      "captured_at_kst": "2026-10-03T21:41:45+09:00",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 90620,
+      "sha256": "6a12f6b7e989d995f2c47c0149116e05a015d5a68ade8bca72cbfa76dffebbec",
+      "evidence_type": "Built-in sample: one wrong answer"
+    },
+    {
+      "file": "v2-create.png",
+      "source_url": "https://alt-tab-mu.vercel.app/v2/?view=create",
+      "captured_at_kst": "2026-10-03T21:42:47+09:00",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 58516,
+      "sha256": "0cc6f83f120ce3f4fc44a0f269385b70bb93561e7283f426775ce00b1fd1434e",
+      "evidence_type": "Input screen, no AI call"
+    },
+    {
+      "file": "v2-mobile.png",
+      "source_url": "https://alt-tab-mu.vercel.app/v2/",
+      "captured_at_kst": "2026-10-03T21:45:02+09:00",
+      "width": 390,
+      "height": 844,
+      "bytes": 43294,
+      "sha256": "44ed596719c96e491458583c1f23da42d172058240b12daf06b822e7ef3f61a3",
+      "evidence_type": "Live list, 390px viewport"
+    },
+    {
+      "file": "v2-exam-intro.png",
+      "source_url": "https://alt-tab-mu.vercel.app/v2/?exam=4558dcc2-830c-4969-a475-e44c2dd7c688",
+      "captured_at_kst": "2026-10-03T21:44:59+09:00",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 45696,
+      "sha256": "687c7f580df2a841540bf721c144648148c7ebe4e6d6d418cc4d513b22a36514",
+      "evidence_type": "Before participation; no submitted data"
+    }
+  ]
+}
