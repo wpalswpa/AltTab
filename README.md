@@ -87,6 +87,31 @@
 - **첫 제출 비교:** v2는 시험별·브라우저별 첫 제출만 집계하고, 같은 점수는 공동 순위로 표시한다. 쿠키를 지우거나 다른 브라우저를 쓰면 별도 참가자로 인식할 수 있다.
 - **저장 방식 구분:** 기존 학습 결과는 브라우저, 기존 파일 업로드는 Vercel 임시 디스크, v2 시험·응시는 Supabase를 사용한다. 모든 데이터가 재배포 시 사라지는 구조는 아니다.
 
+## 담당 범위
+
+5인 팀 중 이 계정이 맡은 부분이다. 커밋은 [팀 원본](https://github.com/Snow0821/AltTab)의 기록이다.
+
+| 영역 | 한 일 | 근거 |
+|---|---|---|
+| 배포 장애 진단 | 팀 배포 주소가 첫 화면부터 서버 오류로 열리지 않았다. 같은 코드를 별도 배포에 올려 런타임 로그로 원인(읽기 전용 디스크에 업로드 폴더 생성)을 찾고, 업로드를 임시 폴더로 옮겼다 | [fe5bd85](https://github.com/Snow0821/AltTab/commit/fe5bd85), [PR #8](https://github.com/Snow0821/AltTab/pull/8) |
+| 교안 기반 문제 생성 | 학생이 개인 AI 계정 없이 쓰도록 서버가 학교 AI로 객관식 5문제를 만든다. 형식·근거 문장 검사를 통과한 문항이 5개 미만이면 가짜 문제 대신 실패로 알린다. 브라우저 저장, 같은 범위 재생성 방지, 중복 클릭 차단, 오답 복습 | [cef0a8a](https://github.com/Snow0821/AltTab/commit/cef0a8a) |
+| 요구사항과 배포 일치 | 심사 AI가 PRD와 배포 주소를 대조하므로, 배포에서 확인되지 않은 공유·비교 기능을 다음 단계로 내리고 PRD·발표·사용 매뉴얼을 실제 서비스에 맞췄다 | [a19ea5c](https://github.com/Snow0821/AltTab/commit/a19ea5c), [33b26e1](https://github.com/Snow0821/AltTab/commit/33b26e1) |
+| 배포 주소 검증 | 자료 2개 각 5문제, 근거 문장이 해당 자료에만 있는지, 새로고침 유지, 실패 후 재시도, 연타 시 요청 1회 등 12항목을 휴대폰 폭(390px)에서 두 번 통과 | [PRD 8절](passfinder-prd.md) |
+
+화면·UI, DB 연결 점검, 세트 저장·채점 API, 초기 MCP 시도는 다른 팀원이 맡았다.
+
+## 대회 뒤 후속 작업
+
+제출 뒤 이어서 만든 작업이다. 모두 `main`에 합치지 않은 브랜치이고, 배포 서비스에는 들어가지 않았다.
+
+| 브랜치 | 내용 | 상태 |
+|---|---|---|
+| [`fix/ai-question-quality`](https://github.com/wpalswpa/AltTab/tree/fix/ai-question-quality) | 글자 검사만으로는 틀린 정답·복수 정답·반대 해설을 통과시키는 문제를 합성 사례 4개로 재현했다. 정답과 해설을 숨긴 채 같은 모델이 다시 풀게 해 정답이 일치할 때만 내보내고, 호출 6회·전체 110초 상한을 두었다. 설계는 [문항 품질 문서](https://github.com/wpalswpa/AltTab/blob/fix/ai-question-quality/docs/ai-question-quality.md) | 가짜 AI 서버로 39개 테스트 통과. 실제 모델 호출과 정답률 측정은 하지 않았다 |
+| [`fix/study-answer-recovery`](https://github.com/wpalswpa/AltTab/tree/fix/study-answer-recovery) | 풀던 답을 잃지 않게 보존하고, 브라우저 저장 실패를 사용자에게 알린다 | 미배포 |
+| [`docs/business-claims-check`](https://github.com/wpalswpa/AltTab/tree/docs/business-claims-check) | 가격·원가·검수 조건 같은 사업 주장을 코드와 대조해, 확인된 것과 아직 가정인 것을 나눴다 | 문서 |
+
+[사업화 재설계](docs/business-redesign.md)는 대회 뒤 심사위원의 서면 피드백을 반영한 검토안이다. 학생이 남의 교안을 올리는 구조의 저작권 문제 때문에, 교수자·교육기관이 자기 자료로 쓰는 B2B 출제 도구로 고객을 바꿨다. 공식 통계로 시장을 추정했더니 대학 판매만으로는 작아서, 출제 기능을 API로 공급하는 매출 축을 함께 두었다. 개인정보 동의·가명 처리, KPI, 단계별 계획도 담았다. 수치는 모두 가정 표시를 붙였고 실제 수요는 확인하지 않았다.
+
 ## 로컬 실행
 
 Node.js 18 이상이 필요하다.
@@ -119,6 +144,7 @@ node tests/v2-preview.cjs
 | [`passfinder-prd.md`](passfinder-prd.md) | 제출 당시 요구사항과 범위 |
 | [`docs/v2.md`](docs/v2.md) | 후속 v2 설계·API·기존 검증 기록 |
 | [`docs/screen-archive.md`](docs/screen-archive.md) | 화면 보존 범위와 확인 기준 |
+| [`docs/business-redesign.md`](docs/business-redesign.md) | 대회 뒤 사업화 재설계(권리·개인정보·시장 추정·단계 계획) |
 | [`인수인계.md`](인수인계.md) | 제출 당시 운영 구조와 남은 일 |
 
 팀 개발 절차는 [협업 가이드](CONTRIBUTING.md), AI 작업 지침은 [AGENTS.md](AGENTS.md)를 따른다. 기존 [서버·DB 구현 지시](docs/클로드_공통시험_구현지시.md)와 [발표 자료 제작 흐름](docs/presentation/발표제작흐름.md)은 당시 작업 기록으로 보존한다.
